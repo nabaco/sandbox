@@ -50,8 +50,8 @@ void* conn_handler(void* args) {
     FD_SET(sock, &fds);
     while(!termination) {
         fdset = fds;
-		len = sizeof (error);
-		ret = getsockopt (sock, SOL_SOCKET, SO_ERROR, &error, &len);
+		len = sizeof(error);
+		ret = getsockopt(sock, SOL_SOCKET, SO_ERROR, &error, &len);
 
 		if (ret != RETURN_OK) {
 			/* there was a problem getting the error code */
@@ -144,7 +144,7 @@ int main(void) {
     socklen_t addr_len = 0;
     pthread_t conn_pt = 0;
     pthread_t conn_threads[MAX_CONNS_QUE];
-    pthread_t pt_id = 0;
+    //pthread_t pt_id = 0;
     struct timespec ts;
 
     log_info("Server init");

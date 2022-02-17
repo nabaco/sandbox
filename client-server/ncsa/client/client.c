@@ -7,7 +7,7 @@
 #define MAX_THREADS 10
 
 typedef struct test_s {
-    char name[5];
+    char name[32];
     int id;
     int ret;
 } test_t;
@@ -31,18 +31,18 @@ int main(void) {
 
     for(int i=0; i<MAX_THREADS;i++) {
         test_arg[i].id=i;
-        sprintf(test_arg[i].name,"Test%d",i);
+        ret = sprintf(test_arg[i].name,"Test%d",i);
         test_arg[i].ret=RETURN_ERR;
 
         printf("Starting thread #%d\n",i);
-        pthread_create(&thread_id[i], NULL, thread_routine, (void *)&test_arg[i]);
+        ret = pthread_create(&thread_id[i], NULL, thread_routine, (void *)&test_arg[i]);
     }
 
     for(int i=0; i<MAX_THREADS;i++) {
-        pthread_join(thread_id[i], NULL);
+        ret = pthread_join(thread_id[i], NULL);
 
         printf("Thread return value: %d\n", test_arg[i].ret);
     }
 
-    return RETURN_OK;
+    return ret;
 }

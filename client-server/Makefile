@@ -2,6 +2,7 @@ SUBDIRS=ncsa/client ncsa/server ncsa/common
 CLEAN_SUBDIRS=$(addprefix clean-,$(SUBDIRS))
 .PHONY: subdirs $(SUBDIRS) clean $(CLEAN_SUBDIRS)
 
+export CPPFLAGS+=-Wall -Wextra -Werror
 subdirs:$(SUBDIRS)
 
 ncsa/client /ncsa/server:ncsa/common

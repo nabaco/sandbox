@@ -17,8 +17,8 @@ CMN_DEPS := $(CMN_OBJS:.o=.d)
 #INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 INC_FLAGS := -I../..
 
-CPPFLAGS ?= $(INC_FLAGS) -MMD -MP
-LDFLAGS ?= -lpthread
+CPPFLAGS += $(INC_FLAGS) -MMD -MP
+LDFLAGS += -lpthread
 
 $(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
 	$(CC) $(OBJS) -o $@ $(LDFLAGS)

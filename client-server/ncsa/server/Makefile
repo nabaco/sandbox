@@ -17,10 +17,11 @@ CMN_DEPS := $(CMN_OBJS:.o=.d)
 #INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 INC_FLAGS := -I../..
 
-CPPFLAGS += $(INC_FLAGS) -MMD -MP -g
-LDFLAGS += -lpthread
+CPPFLAGS ?= $(INC_FLAGS) -MMD -MP -g
+CFLAGS ?= -Werror -Wall -Wextra
+LDFLAGS ?= -lpthread
 
-$(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
+$(BUILD_DIR)/$(TARGET_EXEC): $(OBJS) $(CMN_OBJS)
 	$(CC) $(OBJS) $(CMN_OBJS) -o $@ $(LDFLAGS)
 
 # assembly

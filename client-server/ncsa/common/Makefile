@@ -5,21 +5,22 @@
 BUILD_DIR ?= ./build
 SRC_DIRS ?= ../../
 
-SRCS := $(shell find . -name *.cpp -or -name *.c -or -name *.s)
-OBJS := $(SRCS:%=%.o)
+SRCS := $(shell find . -type "f" -name "*.cpp" -or -name "*.c" -or -name "*.s")
+OBJS := $(SRCS:%.c=%.o)
 DEPS := $(OBJS:.o=.d)
 
 INC_DIRS := $(shell find $(SRC_DIRS) -type d)
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
 CPPFLAGS ?= $(INC_FLAGS) -MMD -MP
+CFLAGS ?= -Werror -Wall -Wextra
 LDFLAGS ?= -lpthread
 
 all: $(OBJS)
 
 # c source
-$(OBJS): $(SRCS)
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $<
+%.c.o: %.c
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $< -o $@
 
 .PHONY: clean
 

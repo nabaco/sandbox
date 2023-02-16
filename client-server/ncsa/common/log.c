@@ -11,9 +11,9 @@ void log_format(const char* tag, const char* message, va_list args) {
     time(&now);
     char * date =ctime(&now);
     date[strlen(date) - 1] = '\0';
-    printf("%s [%s] ", date, tag);
-    vprintf(message, args);
-    printf("\n");
+    fprintf(stderr, "%s [%s] ", date, tag);
+    vfprintf(stderr, message, args);
+    fprintf(stderr, "\n");
 }
 
 void log_error(const char* message, ...) {
